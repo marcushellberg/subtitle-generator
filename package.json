@@ -1,0 +1,15 @@
+{
+  "name": "subtitle-generator",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "fluent-ffmpeg": "^2.1.2",
+    "openai": "^4.16.1"
+  }
+}
