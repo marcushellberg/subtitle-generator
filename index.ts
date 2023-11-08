@@ -36,28 +36,6 @@ async function transcribeToSrt(filePath: string) {
     return transcription as unknown as string
 }
 
-// Function to clean up transcription
-async function cleanUpTranscription(srtData: string) {
-    const completion = await openai.chat.completions.create({
-        messages: [
-            {
-                role: "system",
-                content:
-                    `You are a diligent proof-reader. Fix transcription errors in the given subtitle file and ensure product names 'Vaadin' and 'Hilla' are correct. 
-                    KEEP TIMESTAMPS EXACTLY THE SAME.
-                    Correct subtitles are critical for audience members who are deaf or hard of hearing, please do your best to ensure accuracy.
-                    ONLY OUTPUT THE SRT FILE CONTENTS, DO NOT OUTPUT ANYTHING ELSE.
-                `
-            },
-            {role: "user", content: srtData}
-        ],
-        model: "gpt-4-1106-preview",
-        max_tokens: 4096,
-    });
-
-    return completion.choices[0].message.content || '';
-}
-
 // Main function to process the directory
 async function processDirectory(directoryPath: string) {
     const files = fs.readdirSync(directoryPath);
@@ -78,9 +56,6 @@ async function processDirectory(directoryPath: string) {
 
                 // Transcribe to SRT
                 const srtData = await transcribeToSrt(mp3Path);
-
-                // // Clean up transcription
-                // const cleanedSrt = await cleanUpTranscription(srtData);
 
                 // Save SRT file
                 fs.writeFileSync(srtPath, srtData);
