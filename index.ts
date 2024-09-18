@@ -34,7 +34,7 @@ async function transcribeToSrt(filePath: string) {
     model: "whisper-1",
     language: "en",
     prompt:
-      "Please transcribe the following audio into subtitles. Ensure that the Vaadin, Hilla and LangChain4j product names are spelled correctly.",
+      "Please transcribe the following audio into subtitles. Ensure that the Vaadin and Hilla product names are spelled correctly.",
     response_format: "srt",
   });
 
